@@ -34,16 +34,24 @@ const box = {
 
 const Instrument = ({ children, showBox, size }) => {
   return (
-    <div className="instrument heading" style={{ 
-      height: size ?? '250px',
-      width: size ?? '250px',
-      position: 'relative',
-      display: 'inline-block',
-      overflow: 'hidden'
-    }}>
-      {(showBox ?? true) &&
-        <img src={fi_box} className="background box" style={box} alt="" />
-      }
+    <div
+      className='instrument heading'
+      style={{
+        height: size ?? '250px',
+        width: size ?? '250px',
+        position: 'relative',
+        display: 'inline-block',
+        overflow: 'hidden'
+      }}
+    >
+      {(showBox ?? true) && (
+        <img
+          src={fi_box.default}
+          className='background box'
+          style={box}
+          alt=''
+        />
+      )}
       {children}
     </div>
   )
@@ -52,12 +60,20 @@ const Instrument = ({ children, showBox, size }) => {
 export const HeadingIndicator = (params) => {
   return (
     <Instrument {...params}>
-      <div className="heading box" style={{ ...box, transform: `rotate(${-params.heading ?? 0}deg)` }}>
-        <img src={heading_yaw} className="box" style={box} alt="" />
+      <div
+        className='heading box'
+        style={{ ...box, transform: `rotate(${-params.heading ?? 0}deg)` }}
+      >
+        <img src={heading_yaw.default} className='box' style={box} alt='' />
       </div>
-      <div className="mechanics box" style={box}>
-        <img src={heading_mechanics} className="box" style={box} alt="" />
-        <img src={fi_circle} className="box" style={box} alt="" />
+      <div className='mechanics box' style={box}>
+        <img
+          src={heading_mechanics.default}
+          className='box'
+          style={box}
+          alt=''
+        />
+        <img src={fi_circle.default} className='box' style={box} alt='' />
       </div>
     </Instrument>
   )
@@ -69,16 +85,24 @@ export const Variometer = (params) => {
   if (vario > constants.vario_bound) vario = constants.vario_bound
   else if (vario < -constants.vario_bound) vario = -constants.vario_bound
 
-  vario = vario * 90;
+  vario = vario * 90
 
   return (
     <Instrument {...params}>
-      <img src={vertical_mechanics} className="box" style={box} alt="" />
-      <div className="vario box" style={{ ...box, transform: `rotate(${vario}deg)` }}>
-        <img src={fi_needle} className="box" style={box} alt="" />
+      <img
+        src={vertical_mechanics.default}
+        className='box'
+        style={box}
+        alt=''
+      />
+      <div
+        className='vario box'
+        style={{ ...box, transform: `rotate(${vario}deg)` }}
+      >
+        <img src={fi_needle.default} className='box' style={box} alt='' />
       </div>
-      <div className="mechanics box" style={box}>
-        <img src={fi_circle} className="box" style={box} alt="" />
+      <div className='mechanics box' style={box}>
+        <img src={fi_circle.default} className='box' style={box} alt='' />
       </div>
     </Instrument>
   )
@@ -87,12 +111,15 @@ export const Variometer = (params) => {
 export const TurnCoordinator = (params) => {
   return (
     <Instrument {...params}>
-      <img src={turn_coordinator} className="box" style={box} alt="" />
-      <div className="turn box" style={{ ...box, transform: `rotate(${params.turn}deg)` }}>
-        <img src={fi_tc_airplane} className="box" style={box} alt="" />
+      <img src={turn_coordinator.default} className='box' style={box} alt='' />
+      <div
+        className='turn box'
+        style={{ ...box, transform: `rotate(${params.turn}deg)` }}
+      >
+        <img src={fi_tc_airplane.default} className='box' style={box} alt='' />
       </div>
-      <div className="mechanics box" style={box}>
-        <img src={fi_circle} className="box" style={box} alt="" />
+      <div className='mechanics box' style={box}>
+        <img src={fi_circle.default} className='box' style={box} alt='' />
       </div>
     </Instrument>
   )
@@ -102,18 +129,22 @@ export const Airspeed = (params) => {
   let speed = params.speed ?? 0
 
   if (speed > constants.airspeed_bound_h) speed = constants.airspeed_bound_h
-  else if (speed < constants.airspeed_bound_l) speed = constants.airspeed_bound_l
+  else if (speed < constants.airspeed_bound_l)
+    speed = constants.airspeed_bound_l
 
   speed = 90 + speed * 2
 
   return (
     <Instrument {...params}>
-      <img src={speed_mechanics} className="box" style={box} alt="" />
-      <div className="speed box" style={{ ...box, transform: `rotate(${speed}deg)` }}>
-        <img src={fi_needle} className="box" style={box} alt="" />
+      <img src={speed_mechanics.default} className='box' style={box} alt='' />
+      <div
+        className='speed box'
+        style={{ ...box, transform: `rotate(${speed}deg)` }}
+      >
+        <img src={fi_needle.default} className='box' style={box} alt='' />
       </div>
-      <div className="mechanics box" style={box}>
-        <img src={fi_circle} className="box" style={box} alt="" />
+      <div className='mechanics box' style={box}>
+        <img src={fi_circle.default} className='box' style={box} alt='' />
       </div>
     </Instrument>
   )
@@ -121,26 +152,40 @@ export const Airspeed = (params) => {
 
 export const Altimeter = (params) => {
   let altitude = params.altitude ?? 0
-  let needle = 90 + altitude % 1000 * 360 / 1000
-  let needleSmall = altitude / 10000 * 360
+  let needle = 90 + ((altitude % 1000) * 360) / 1000
+  let needleSmall = (altitude / 10000) * 360
 
   let pressure = params.pressure ?? 1013.25
   pressure = 2 * pressure - 1980
 
   return (
     <Instrument {...params}>
-      <div className="pressure box" style={{ ...box, transform: `rotate(${pressure}deg)` }}>
-        <img src={altitude_pressure} className="box" style={box} alt="" />
+      <div
+        className='pressure box'
+        style={{ ...box, transform: `rotate(${pressure}deg)` }}
+      >
+        <img
+          src={altitude_pressure.default}
+          className='box'
+          style={box}
+          alt=''
+        />
       </div>
-      <img src={altitude_ticks} className="box" style={box} alt="" />
-      <div className="needleSmall box" style={{ ...box, transform: `rotate(${needleSmall}deg)` }}>
-        <img src={fi_needle_small} className="box" style={box} alt="" />
+      <img src={altitude_ticks.default} className='box' style={box} alt='' />
+      <div
+        className='needleSmall box'
+        style={{ ...box, transform: `rotate(${needleSmall}deg)` }}
+      >
+        <img src={fi_needle_small.default} className='box' style={box} alt='' />
       </div>
-      <div className="needle box" style={{ ...box, transform: `rotate(${needle}deg)` }}>
-        <img src={fi_needle} className="box" style={box} alt="" />
+      <div
+        className='needle box'
+        style={{ ...box, transform: `rotate(${needle}deg)` }}
+      >
+        <img src={fi_needle.default} className='box' style={box} alt='' />
       </div>
-      <div className="mechanics box" style={box}>
-        <img src={fi_circle} className="box" style={box} alt="" />
+      <div className='mechanics box' style={box}>
+        <img src={fi_circle.default} className='box' style={box} alt='' />
       </div>
     </Instrument>
   )
@@ -148,21 +193,41 @@ export const Altimeter = (params) => {
 
 export const AttitudeIndicator = (params) => {
   let pitch = params.pitch ?? 0
-  if (pitch > constants.pitch_bound) { pitch = constants.pitch_bound; }
-  else if (pitch < -constants.pitch_bound) { pitch = -constants.pitch_bound; }
+  if (pitch > constants.pitch_bound) {
+    pitch = constants.pitch_bound
+  } else if (pitch < -constants.pitch_bound) {
+    pitch = -constants.pitch_bound
+  }
 
   return (
     <Instrument {...params}>
-      <div className="roll box" style={{ ...box, top: '0%', transform: `rotate(${params.roll ?? 0}deg)` }}>
-        <img src={horizon_back} className="box" alt="" style={{ ...box }} />
-        <div className="pitch box" style={{ ...box, top: `${(pitch) * 0.7}%` }}>
-          <img src={horizon_ball} className="box" style={box} alt="" />
+      <div
+        className='roll box'
+        style={{
+          ...box,
+          top: '0%',
+          transform: `rotate(${params.roll ?? 0}deg)`
+        }}
+      >
+        <img
+          src={horizon_back.default}
+          className='box'
+          alt=''
+          style={{ ...box }}
+        />
+        <div className='pitch box' style={{ ...box, top: `${pitch * 0.7}%` }}>
+          <img src={horizon_ball.default} className='box' style={box} alt='' />
         </div>
-        <img src={horizon_circle} className="box" style={box} alt="" />
+        <img src={horizon_circle.default} className='box' style={box} alt='' />
       </div>
-      <div className="mechanics box" style={box}>
-        <img src={horizon_mechanics} className="box" style={box} alt="" />
-        <img src={fi_circle} className="box" style={box} alt="" />
+      <div className='mechanics box' style={box}>
+        <img
+          src={horizon_mechanics.default}
+          className='box'
+          style={box}
+          alt=''
+        />
+        <img src={fi_circle.default} className='box' style={box} alt='' />
       </div>
     </Instrument>
   )
